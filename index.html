@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServiceDesk Plus API Request</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ServiceDesk Plus API Request</h1>
+    <textarea id="responseField" readonly></textarea>
+    <br>
+    <button id="getDataButton">Get Data</button>
+
+    <script>
+        $(document).ready(function() {
+            $('#getDataButton').click(function() {
+                $.ajax({
+                    url: 'https://hdclone4.exactsystems.com/api/v3/requests',
+                    type: 'GET',
+                    headers: {
+                        'TECHNICIAN_KEY': '180F7DC2-ABCB-41C3-A31D-D779D7C0355C'
+                    },
+                    success: function(data) {
+                        $('#responseField').val(JSON.stringify(data, null, 2));
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $('#responseField').val('Error: ' + textStatus + '\n' + errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
